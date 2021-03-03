@@ -17,12 +17,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
-import lombok.Data;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
