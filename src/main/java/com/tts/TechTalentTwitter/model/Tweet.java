@@ -21,15 +21,15 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//@Data
+//@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 public class Tweet {
 
@@ -43,9 +43,9 @@ public class Tweet {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "tweet_tag", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-	private List<Tag> tags;
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+//	@JoinTable(name = "tweet_tag", joinColumns = @JoinColumn(name = "tweet_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+//	private List<Tag> tags;
 
 	@NotEmpty(message = "Tweet cannot be empty")
 	@Length(max = 280, message = "Tweet cannot have more than 280 characters")
@@ -54,48 +54,79 @@ public class Tweet {
 	@CreationTimestamp
 	private Date createdAt;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "tweet_tag", joinColumns = @JoinColumn(name = "tweet_id"),
+	    inverseJoinColumns = @JoinColumn(name = "tag_id"))
+	private List<Tag> tags;
+	
+	
+	
+	
+	public Tweet() {
+		super();
+	}
+
+	public Tweet(Long id, User user,
+			@NotEmpty(message = "Tweet cannot be empty") @Length(max = 280, message = "Tweet cannot have more than 280 characters") String message,
+			Date createdAt) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.message = message;
+		this.createdAt = createdAt;
+	}
+
 	// Use the code below if your lombok is not working:
-	// public Long getId() {
-	// return id;
-	// }
+	 public Long getId() {
+	 return id;
+	 }
 
-	// public User getUser() {
-	// return user;
-	// }
+	 public User getUser() {
+	 return user;
+	 }
 
-	// public void setUser(User user) {
-	// this.user = user;
-	// }
+	 public void setUser(User user) {
+	 this.user = user;
+	 }
 
-	// public List<Tag> getTags() {
-	// return tags;
-	// }
+	 public List<Tag> getTags() {
+	 return tags;
+	 }
 
-	// public void setTags(List<Tag> tags) {
-	// this.tags = tags;
-	// }
+	 public void setTags(List<Tag> tags) {
+	 this.tags = tags;
+	 }
 
-	// public String getMessage() {
-	// return message;
-	// }
+	 public String getMessage() {
+	 return message;
+	 }
 
-	// public void setMessage(String message) {
-	// this.message = message;
-	// }
+	 public void setMessage(String message) {
+	 this.message = message;
+	 }
 
-	// public Date getCreatedAt() {
-	// return createdAt;
-	// }
+	 public Date getCreatedAt() {
+	 return createdAt;
+	 }
 
-	// public void setCreatedAt(Date createdAt) {
-	// this.createdAt = createdAt;
-	// }
+	 public void setCreatedAt(Date createdAt) {
+	 this.createdAt = createdAt;
+	 }
 
-	// @Override
-	// public String toString() {
-	// return "Tweet [createdAt=" + createdAt + ", id=" + id + ", message=" +
-	// message + ", tags=" + tags
-	// + ", user=" + user + "]";
-	// }
+	@Override
+	public String toString() {
+		return "Tweet [id=" + id + ", user=" + user + ", message=" + message + ", createdAt=" + createdAt + "]";
+	}
 
+//	 @Override
+//	 public String toString() {
+//	 return "Tweet [createdAt=" + createdAt + ", id=" + id + ", message=" +
+//	 message + ", tags=" + tags
+//	 + ", user=" + user + "]";
+//	 }
+
+	 
+	 
+	 
+	 
 }

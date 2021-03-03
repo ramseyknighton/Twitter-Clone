@@ -55,11 +55,19 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+    
+    
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_follower", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "follower_id"))
-    private List<User> followers;
-    @ManyToMany(mappedBy = "followers")
-    private List<User> following;
+	@JoinTable(name = "user_follower", joinColumns = @JoinColumn(name = "user_id"), 
+	    inverseJoinColumns = @JoinColumn(name = "follower_id"))
+	private List<User> followers;
+    
+    
+    @ManyToMany(mappedBy="followers")
+	private List<User> following;
+    
+    
+    
 	public String getEmail() {
 		return email;
 	}
@@ -126,4 +134,5 @@ public class User {
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", active=" + active + ", createdAt="
 				+ createdAt + ", roles=" + roles + ", followers=" + followers + ", following=" + following + "]";
 	}
+	
 }
